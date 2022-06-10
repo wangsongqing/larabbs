@@ -1,0 +1,21 @@
+version: '2'
+services:
+  backend:
+    image: registry.cn-hangzhou.aliyuncs.com/songqing/app-backend:latest
+    env_file: "./app-backend.env"
+  cron:
+    image: registry.cn-hangzhou.aliyuncs.com/songsong/app-backend:latest
+    env_file: "./app-backend.env"
+    command: ['cron', '-f']
+  worker:
+    image: registry.cn-hangzhou.aliyuncs.com/songsong/app-backend:latest
+    env_file: "./app-backend.env"
+    command: ['/usr/bin/supervisord', '-n', '-c', '/etc/supervisor/supervisord.conf']
+  nginx:
+    image: registry.cn-hangzhou.aliyuncs.com/songsong/app-nginx:latest
+    volumes_from:
+      - backend
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
