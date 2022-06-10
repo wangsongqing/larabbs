@@ -1,3 +1,7 @@
+## 项目介绍
+Laravel框架写的一个论坛
+主要是为了学习用docker部署项目
+
 ## 前置工作
 - 修改配置文件 backend/scripts/prod-local/app-backend
 - 配置host 127.0.0.1  shop.test
